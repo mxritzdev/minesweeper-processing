@@ -150,6 +150,10 @@ class TileService {
     } else if (tile.status == TileStatus.FLAGGED) {
       tile.status = TileStatus.COVERED;
     }
+    
+    int flaggedBombs = 0;
+    
+    
   }
 
   public void tryUncoverAt(int x, int y) {

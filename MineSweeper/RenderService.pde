@@ -94,6 +94,24 @@ class RenderService {
         } else if (mouseButton == RIGHT) {
 
           this.tileService.tryFlagAt(tileX, tileY);
+          
+          int totalBombs = this.tileService.w * this.tileService.h / this.tileService.bombNumberDivider;
+          int flaggedBombs = 0;
+      
+          for (int i = 0; i < this.tileService.h; i++) {
+            for (int j = 0; j < this.tileService.w; j++) {
+      
+              Tile[][] tiles = this.tileService.getAll();
+              
+              if (tiles[i][j].getIsBomb() && tiles[i][j].status == TileStatus.FLAGGED) {
+                flaggedBombs++;
+              }
+            }
+          }
+          
+          if (totalBombs == flaggedBombs) {
+            this.tileService.gameState = GameState.GAMEOVER;
+          }
         }
       }
     } else if (this.tileService.gameState == GameState.PREGAME || this.tileService.gameState == GameState.GAMEOVER) {
@@ -142,6 +160,12 @@ class RenderService {
     }
 
     String startText = "Game over. Found " + flaggedBombs + "/" + totalBombs + " Bombs.";
+
+    if (totalBombs == flaggedBombs) {
+      
+      startText = "You win. Found " + flaggedBombs + "/" + totalBombs + " Bombs.";
+    
+    }
 
     fill(0);
 

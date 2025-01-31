@@ -219,7 +219,7 @@ class RenderService {
           image(this.flag, tileStartX + this.tileRadius, tileStartY + this.tileRadius, this.tileWidthInPixels - 2 * this.tileRadius, this.tileWidthInPixels - 2 * this.tileRadius);
         }
         
-        if (tiles[i][j].getIsBomb() && tiles[i][j].status == TileStatus.UNCOVERED)
+        if ((tiles[i][j].getIsBomb() && tiles[i][j].status == TileStatus.UNCOVERED) || (this.tileService.gameState == GameState.GAMEOVER && tiles[i][j].status != TileStatus.FLAGGED && tiles[i][j].getIsBomb()))
         {
           image(this.bomb, tileStartX + this.tileRadius, tileStartY + this.tileRadius, this.tileWidthInPixels - 2 * this.tileRadius, this.tileWidthInPixels - 2 * this.tileRadius);
         }
